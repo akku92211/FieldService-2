@@ -29,7 +29,7 @@ public class EmailLogController {
 	
 	
 	@PostMapping("/notify")
-	public ResponseEntity<String>notification(@RequestBody EmailLogDTO){
+	public ResponseEntity<String>notification(@RequestBody EmailLogDTO emailLog){
 		String result= emailService.notify(emailLog);
 		return ResponseEntity.ok(result);
 	}
