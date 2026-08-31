@@ -2,7 +2,6 @@ package com.KeyStone.FieldService2.Entity;
 
 import java.time.LocalDateTime;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +32,7 @@ public class EmailLogin {
 	private LocalDateTime sentAt= LocalDateTime.now();
 	private boolean sentStatus;
 	
-	public Emaillogin(String recepientEmail,String subject,String body) {
+	public EmailLogin(String recepientEmail,String subject, String body) {
 		this.recepientEmail=recepientEmail;
 		this.subject=subject;
 		this.body=body;

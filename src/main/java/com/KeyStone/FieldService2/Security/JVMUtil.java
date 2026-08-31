@@ -1,17 +1,17 @@
 package com.KeyStone.FieldService2.Security;
 
 import java.nio.charset.StandardCharsets;
-import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.stereotype.Component;
 
 import com.KeyStone.FieldService2.Entity.UserEntity;
 import com.KeyStone.FieldService2.Enum.Permissions;
-import com.KeyStone.FieldService2.Repository.UserRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -37,16 +37,17 @@ public class JVMUtil {
         );
     }
 
-    public String generateToken(UserRepository user) {
+    public String generateToken(UserEntity user) {
 
         Map<String, Object> claims = new HashMap<>();
 
         claims.put("role", user.getRole().name());
 
-        Set<Permissions> perm =RoleBasedPermissions.getRoleBasedPermission()
-                        .get(user.getRole());
+        Set<Permissions> permissions =
+                RoleBasedPermissions.getRoleBasedPermission()
+                        .get(user.getRole().name());
 
-        claims.put("permissions", perm);
+        claims.put("permissions", permissions);
 
         Date now = new Date();
 
@@ -66,7 +67,6 @@ public class JVMUtil {
     public boolean validateToken(String token) {
 
         try {
-
             Jwts.parser()
                     .verifyWith(key)
                     .build()
@@ -75,7 +75,6 @@ public class JVMUtil {
             return true;
 
         } catch (Exception e) {
-
             return false;
         }
     }
@@ -90,13 +89,15 @@ public class JVMUtil {
     }
 
     public String getUserEmail(String token) {
-
         return getClaim(token).getSubject();
     }
+
     public String extractToken(String header) {
-   	 if(header !=null && header.startsWith("Bearer ")) {
-   		 return header.substring(7);
-   	 }
-   	 return null;
+
+        if (header != null && header.startsWith("Bearer ")) {
+            return header.substring(7);
+        }
+
+        return null;
     }
 }

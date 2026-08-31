@@ -1,12 +1,15 @@
 package com.KeyStone.FieldService2.Entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +42,8 @@ public class Customer {
 	private boolean activa;
 	private LocalDateTime createdAt;
 	
+	@OneToMany(mappedBy="customer")
+	private List<Site>sites=new ArrayList<>();
 	
 	public Long getId() {
 		return Id;
