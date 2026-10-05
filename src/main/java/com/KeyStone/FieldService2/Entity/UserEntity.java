@@ -16,11 +16,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-@Table(name="user_entity")
-
+@Table(name="users")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 public class UserEntity {
 
@@ -45,17 +42,24 @@ public class UserEntity {
     private String resetToken;
     private Date resetTokenExpiry;
     
-    public UserEntity() {}
-    public UserEntity(Long id,String userName,String userEmail,String phone,String password,Role role) {
-    	this.id=id;
-    	this.userName=userName;
-    	this.userEmail=userEmail;
-    	this.phone=phone;
-    	this.password=password;
-    	this.role=role;
-   }
-
     
+    
+	public UserEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public UserEntity(Long id, String userName, String userEmail, String phone, String password, Role role,
+			String resetToken, Date resetTokenExpiry) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.phone = phone;
+		this.password = password;
+		this.role = role;
+		this.resetToken = resetToken;
+		this.resetTokenExpiry = resetTokenExpiry;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -71,7 +75,7 @@ public class UserEntity {
 	public String getUserEmail() {
 		return userEmail;
 	}
-	public void setUserEamil(String userEmail) {
+	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
 	public String getPhone() {

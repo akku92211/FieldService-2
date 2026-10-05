@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,31 +20,41 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="ecustomer")
+@Table(name="customers")
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 
 public class Customer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long Id;
-	
+	@Column(name="company_name", nullable=false)
 	private String CompanyName;
-	@Column(nullable=false)
-	private String ContactPerson;
-	@Column(nullable=false)
-	private String email;
-	@Column(nullable=false)
-    private String phone;
-	@Column(nullable=false)
-     private String address;
-	private boolean activa;
-	private LocalDateTime createdAt;
 	
+	@Column(name="contact_person", nullable=false)
+	private String ContactPerson;
+	
+	@Column(name = "email", nullable = false)
+    private String email;
+	
+	@Column(name = "phone", nullable = false)
+    private String phone;
+	
+	@Column(name = "address", nullable = false)
+     private String address;
+	
+	@Column(name="activa")	
+    private boolean activa;
+	
+	@Column(name="created_at")
+	private LocalDateTime createdAt;
+
+	@JsonIgnore
 	@OneToMany(mappedBy="customer")
 	private List<Site>sites=new ArrayList<>();
 	

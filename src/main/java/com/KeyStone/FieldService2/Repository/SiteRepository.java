@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.KeyStone.FieldService2.Entity.Site;
 
 @Repository
-public interface SiteRepoitory extends JpaRepository<Site,Long> {
+public interface SiteRepository extends JpaRepository<Site,Long> {
 	List<Site>findByCustomerId(Long customerId);
 
 }

@@ -2,6 +2,7 @@ package com.KeyStone.FieldService2.Service;
 
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,7 @@ import com.KeyStone.FieldService2.Repository.UserRepository;
 import com.KeyStone.FieldService2.Security.EmailLogService;
 import com.KeyStone.FieldService2.Security.JVMUtil;
 import com.KeyStone.FieldService2.Security.TokenBlockService;
+import com.KeyStone.FieldService2.Enum.Role;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -49,8 +51,9 @@ public class UserAuthService {
 
         UserEntity user = new UserEntity();
 
-        user.setUsername(register.userName);
+        user.setUserName(register.userName);
         user.setUserEmail(register.userEmail);
+        user.setPhone(register.phone);
         user.setPassword(passwordEncoder.encode(register.password));
         user.setRole(register.role);
 
@@ -60,10 +63,13 @@ public class UserAuthService {
     }
 
     public AuthResponseDTO login(LoginRequestDTO login) {
+    	
+        String email = login.userEmail.trim();
 
-        UserEntity user = userRepository.findByUserEmail(login.userEamil)
+
+        UserEntity user = userRepository.findByUserEmail(email)
                 .orElseThrow(() ->
-                        new RuntimeException("User not found"));
+                        new RuntimeException("User not found" + email));
 
         if (!passwordEncoder.matches(
                 login.password,
@@ -132,5 +138,29 @@ public class UserAuthService {
         }
 
         return "Logged out successfully";
+    }
+    
+    public List<UserEntity> getTechnicians() {
+        return userRepository.findByRole(Role.TECHNICIAN);
+    }
+    
+    public UserEntity updateTechnician(Long id, UserEntity updatedTechnician) {
+
+        UserEntity technician = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Technician not found"));
+
+        technician.setUserName(updatedTechnician.getUserName());
+        technician.setUserEmail(updatedTechnician.getUserEmail());
+        technician.setPhone(updatedTechnician.getPhone());
+
+        return userRepository.save(technician);
+    }
+    
+    public void deleteTechnician(Long id) {
+
+        UserEntity technician = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Technician not found"));
+
+        userRepository.delete(technician);
     }
 }

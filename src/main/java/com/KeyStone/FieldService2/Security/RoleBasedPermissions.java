@@ -39,6 +39,9 @@ public class RoleBasedPermissions {
                 Permissions.CANCEL_WO,
                 Permissions.CLOSE_WO,
 
+                Permissions.VIEW_ATTACHMENT,
+                Permissions.DOWNLOAD_ATTACHMENT,
+
                 Permissions.ADD_PARTS,
                 Permissions.UPDATE_PARTS,
                 Permissions.VIEW_PARTS,
@@ -69,13 +72,16 @@ public class RoleBasedPermissions {
                 Permissions.VIEW_WO,
                 Permissions.ASSIGN_WO,
                 Permissions.CANCEL_WO,
+                
+                Permissions.VIEW_ATTACHMENT,
+                Permissions.DOWNLOAD_ATTACHMENT,
 
                 Permissions.VIEW_DASHBOARD
         )));
 
 
         // TECHNICIAN
-        permissions.put(Role.TEHNICIAN, new HashSet<>(Arrays.asList(
+        permissions.put(Role.TECHNICIAN, new HashSet<>(Arrays.asList(
                 Permissions.VIEW_WO,
 
                 Permissions.START_WORK,
@@ -88,14 +94,23 @@ public class RoleBasedPermissions {
                 Permissions.VIEW_PARTS,
 
                 Permissions.ADD_TIME_LOGS,
-                Permissions.VIEW_TIME_LOGS
+                Permissions.VIEW_TIME_LOGS,
+                
+                Permissions.UPLOAD_ATTACHMENT,
+                Permissions.VIEW_ATTACHMENT
+                
+
         )));
 
 
         // CUSTOMER
         permissions.put(Role.CUSTOMER, new HashSet<>(Arrays.asList(
                 Permissions.RAISE_REQUEST,
-                Permissions.VIEW_OWN_REQUEST_STATUS
+                Permissions.VIEW_OWN_REQUEST_STATUS,
+                Permissions.UPLOAD_ATTACHMENT,
+                Permissions.VIEW_ATTACHMENT,
+                Permissions.DELETE_ATTACHMENT
+
         )));
     }
 

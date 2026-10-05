@@ -1,5 +1,6 @@
 package com.KeyStone.FieldService2.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -13,110 +14,122 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="sites")
-
+@Table(name = "sites")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Site {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
-	private String siteName;
-	private String appertmentName;
-	private String floorNo;
-	private String addessDetails;
-	private String city;
-	private String State;
-	private String country;
-	private Long zipCode;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="customerId")
-	private Customer customer;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "site_name")
+    private String siteName;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "appartment_name")
+    private String appartmentName;
 
-	public String getSiteName() {
-		return siteName;
-	}
+    @Column(name = "floor_no")
+    private String floorNo;
 
-	public void setSiteName(String siteName) {
-		this.siteName = siteName;
-	}
+    @Column(name = "address", nullable = false)
+    private String addressDetails;
 
-	public String getAppertmentName() {
-		return appertmentName;
-	}
+    @Column(name = "city")
+    private String city;
 
-	public void setAppertmentName(String appertmentName) {
-		this.appertmentName = appertmentName;
-	}
+    @Column(name = "state")
+    private String state;
 
-	public String getFloorNo() {
-		return floorNo;
-	}
+    @Column(name = "country")
+    private String country;
 
-	public void setFloorNo(String floorNo) {
-		this.floorNo = floorNo;
-	}
+    @Column(name = "zip_code")
+    private Long zipCode;
 
-	public String getAddessDetails() {
-		return addessDetails;
-	}
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
-	public void setAddessDetails(String addessDetails) {
-		this.addessDetails = addessDetails;
-	}
 
-	public String getCity() {
-		return city;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getState() {
-		return State;
-	}
+    public String getSiteName() {
+        return siteName;
+    }
 
-	public void setState(String state) {
-		State = state;
-	}
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getAppartmentName() {
+        return appartmentName;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public void setAppertmentName(String appartmentName) {
+        this.appartmentName = appartmentName;
+    }
 
-	public Long getZipCode() {
-		return zipCode;
-	}
+    public String getFloorNo() {
+        return floorNo;
+    }
 
-	public void setZipCode(Long zipCode) {
-		this.zipCode = zipCode;
-	}
+    public void setFloorNo(String floorNo) {
+        this.floorNo = floorNo;
+    }
 
-	public Customer getCustomer() {
-		return customer;
-	}
+    public String getAddressDetails() {
+        return addressDetails;
+    }
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	
-	
-	
+    public void setAddressDetails(String addressDetails) {
+        this.addressDetails = addressDetails;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getstate() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Long getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(Long zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

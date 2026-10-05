@@ -29,8 +29,7 @@ public class JVMUtil {
         String secret = System.getenv("JVM_SECRET");
 
         if (secret == null || secret.isEmpty()) {
-            secret = "Replace this place with secret code";
-        }
+        	secret = "myVeryStrongSecretKeyForFieldServiceManagement2026";        }
 
         key = Keys.hmacShaKeyFor(
                 secret.getBytes(StandardCharsets.UTF_8)

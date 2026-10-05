@@ -22,38 +22,62 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomerController {
 
-	@Autowired
-	private CustomerService customerService;
-	
-	@PostMapping("/create")
-	public ResponseEntity<Customer>createrCustomer(@RequestBody Customer customer){
-		return ResponseEntity.ok(customerService.createCustomer(customer));
-	}
-	
-	@PostMapping("/update/{email}")
-	public ResponseEntity<Customer>updateCustomer(@PathVariable String email, @RequestBody Customer customer){
-		return ResponseEntity.ok(customerService.updateCustomer(email,customer));
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Customer>getCustomerById(@PathVariable Long id){
-		return ResponseEntity.ok(customerService.getCustomer(id));
+    @Autowired
+    private CustomerService customerService;
 
-	}
-	
-	@GetMapping("/{email}")
-	public ResponseEntity<Customer>getCustomerByEmail(@PathVariable String email){
-		return ResponseEntity.ok(customerService.getCustomerByEmail(email));	
-	}
+    @PostMapping("/create")
+    public ResponseEntity<Customer> createCustomer(
+            @RequestBody Customer customer) {
 
-	@GetMapping("/{all}")
-	public ResponseEntity<List<Customer>>getAllCustomer(){
-		return ResponseEntity.ok(customerService.getAllCustomer());	
-	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<String>deleteCustomer(@PathVariable Long id){
-		customerService.deleteCustomer(id);
-		return ResponseEntity.ok("Customer Delete Sucessfully");	
-		}
+        return ResponseEntity.ok(
+                customerService.createCustomer(customer)
+        );
+    }
+
+    @PostMapping("/update/{email}")
+    public ResponseEntity<Customer> updateCustomer(
+            @PathVariable String email,
+            @RequestBody Customer customer) {
+
+        return ResponseEntity.ok(
+                customerService.updateCustomer(email, customer)
+        );
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Customer> getCustomerById(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                customerService.getCustomer(id)
+        );
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Customer> getCustomerByEmail(
+            @PathVariable String email) {
+
+        return ResponseEntity.ok(
+                customerService.getCustomerByEmail(email)
+        );
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Customer>> getAllCustomer() {
+
+        return ResponseEntity.ok(
+                customerService.getAllCustomer()
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCustomer(
+            @PathVariable Long id) {
+
+        customerService.deleteCustomer(id);
+
+        return ResponseEntity.ok(
+                "Customer Delete Successfully"
+        );
+    }
 }

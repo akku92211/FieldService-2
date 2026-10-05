@@ -1,6 +1,5 @@
 package com.KeyStone.FieldService2.Security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,9 +14,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config) throws Exception {
@@ -31,13 +27,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JvmFilter jvmFilter() {
-        return new JvmFilter(customUserDetailsService);
+    public JvmFilter jvmFilter(
+            JVMUtil jvmUtil,
+            CustomUserDetailsService customUserDetailsService) {
+
+        return new JvmFilter(jvmUtil, customUserDetailsService);
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http)
-            throws Exception {
+    public SecurityFilterChain filterChain(
+            HttpSecurity http,
+            JvmFilter jvmFilter) throws Exception {
 
         http
             .csrf(csrf -> csrf.disable())
@@ -50,21 +50,36 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth ->
                 auth
-                    .requestMatchers(
-                        "/api/user_auth/**",
-                        "/api/email_log/**",
-                        "/login.html",
-                        "/css/**",
-                        "/js/**"
-                    )
-                    .permitAll()
-
+                .requestMatchers(
+                        "/api/site/all",
+                	    "/",
+                	    "/index.html",
+                	    "/Login.html",   
+                	    "/register.html",
+                        "/dashboard.html",
+                	    "/workorder.html",
+                	    "/customer.html",       
+                	    "/add-customer.html",
+                        "/site.html",
+                        "/technician.html",
+                        "/edit-technician.html",
+                	    "/Css/**",
+                	    "/css/**",
+                	    "/js/**",
+                	    "/api/user_auth/**",
+                	    "/api/email_log/**",
+                	    "/api/workorders/**",
+                	    "/api/customer/**",
+                	    "/api/site/**",
+                	    "/api/technician/**"
+                	)
+                	.permitAll()
                     .anyRequest()
-                    .authenticated()
-            )
+                    .permitAll()
+                    )
 
             .addFilterBefore(
-                jvmFilter(),
+                jvmFilter,
                 UsernamePasswordAuthenticationFilter.class
             );
 
