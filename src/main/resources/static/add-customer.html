@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Customer - Field Service</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f6fa;
+        }
+
+        .container-box {
+            max-width: 700px;
+            margin: 50px auto;
+        }
+
+        .card {
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container-box">
+
+    <div class="card shadow-sm p-4">
+
+<h2 class="mb-4" id="formTitle">Add Customer</h2>
+<form id="customerForm">
+
+            <div class="mb-3">
+                <label class="form-label">Company Name</label>
+                <input type="text"      
+                 id="companyName"
+                       class="form-control"
+                       placeholder="Enter company name">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contact Person</label>
+                <input type="text"
+                       id="contactPerson"
+                       class="form-control"
+                       placeholder="Enter contact person">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email"
+                       id="email"
+                       class="form-control"
+                       placeholder="Enter email">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input type="text"
+                       id="phone"
+                       class="form-control"
+                       placeholder="Enter phone number">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Address</label>
+                <textarea id="address"
+                class="form-control"
+                          rows="3"
+                          placeholder="Enter address"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Save Customer
+            </button>
+
+            <a href="/customer.html" class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+const urlParams = new URLSearchParams(window.location.search);
+const customerId = urlParams.get("id");
+
+
+// EDIT MODE
+if (customerId) {
+
+    document.getElementById("formTitle").innerText = "Edit Customer";
+
+    document.querySelector("#customerForm button[type='submit']")
+        .innerText = "Update Customer";
+
+    fetch("/api/customer/id/" + customerId)
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error("Customer not found");
+            }
+
+            return response.json();
+        })
+        .then(customer => {
+
+            document.getElementById("companyName").value =
+                customer.companyName || customer.CompanyName || "";
+
+            document.getElementById("contactPerson").value =
+                customer.contactPerson || customer.ContactPerson || "";
+
+            document.getElementById("email").value =
+                customer.email || "";
+
+            document.getElementById("phone").value =
+                customer.phone || "";
+
+            document.getElementById("address").value =
+                customer.address || "";
+
+        })
+        .catch(error => {
+
+            console.error(error);
+            alert("Customer load nahi hua!");
+
+        });
+}
+
+
+// SAVE / UPDATE
+document.getElementById("customerForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const customerData = {
+
+        companyName: document.getElementById("companyName").value,
+
+        contactPerson: document.getElementById("contactPerson").value,
+
+        email: document.getElementById("email").value,
+
+        phone: document.getElementById("phone").value,
+
+        address: document.getElementById("address").value
+
+    };
+
+
+    let url;
+    let method;
+
+
+    if (customerId) {
+
+        // UPDATE
+        url = "/api/customer/update/" + customerData.email;
+        method = "POST";
+
+    } else {
+
+        // CREATE
+        url = "/api/customer/create";
+        method = "POST";
+
+    }
+
+
+    fetch(url, {
+
+        method: method,
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(customerData)
+
+    })
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Customer save/update failed");
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        if (customerId) {
+
+            alert("Customer updated successfully!");
+
+        } else {
+
+            alert("Customer saved successfully!");
+
+        }
+
+        window.location.href = "/customer.html";
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        alert("Customer save/update nahi hua!");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register - Field Service</title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #f5d9ff,
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at bottom right,
+                    #d9f8e8,
+                    transparent 35%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #f8edff,
+                    #eef8ff,
+                    #f3fff5
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px 15px;
+        }
+
+
+        /* =========================
+           MAIN REGISTER CARD
+        ========================= */
+
+        .register-card {
+
+            width: 100%;
+
+            max-width: 520px;
+
+            background: rgba(255,255,255,0.94);
+
+            border-radius: 24px;
+
+            padding: 30px 34px;
+
+            box-shadow:
+                0 12px 35px rgba(80,60,100,0.14);
+
+            border: 1px solid rgba(255,255,255,0.9);
+        }
+
+
+        /* =========================
+           BRAND
+        ========================= */
+
+        .brand {
+
+            text-align: center;
+
+            color: #7d4054;
+
+            font-size: 27px;
+
+            font-weight: 700;
+
+            margin-bottom: 18px;
+        }
+
+
+        .brand i {
+
+            font-size: 29px;
+
+            margin-right: 8px;
+        }
+
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        .register-title {
+
+            text-align: center;
+
+            color: #293b59;
+
+            font-size: 29px;
+
+            font-weight: 600;
+
+            margin-bottom: 5px;
+        }
+
+
+        .register-subtitle {
+
+            text-align: center;
+
+            color: #718096;
+
+            margin-bottom: 25px;
+
+            font-size: 14px;
+        }
+
+
+        .user-icon {
+
+            width: 62px;
+
+            height: 62px;
+
+            margin: 0 auto 12px auto;
+
+            border-radius: 50%;
+
+            background: #e4d8ff;
+
+            color: #7955c7;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 29px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 17px;
+        }
+
+
+        .form-label {
+
+            color: #344054;
+
+            font-weight: 500;
+
+            margin-bottom: 7px;
+        }
+
+
+        .required {
+
+            color: #e65368;
+        }
+
+
+        .input-group {
+
+            border-radius: 9px;
+
+            overflow: hidden;
+        }
+
+
+        .input-group-text {
+
+            background: #f3efff;
+
+            border: 1px solid #d8dce8;
+
+            color: #6d5aa8;
+
+            min-width: 48px;
+
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+
+        .form-control,
+        .form-select {
+
+            height: 48px;
+
+            border: 1px solid #d8dce8;
+
+            color: #344054;
+
+            background: #ffffff;
+
+            box-shadow: none !important;
+        }
+
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color: #b98de8;
+
+            box-shadow:
+                0 0 0 3px rgba(185,141,232,0.15) !important;
+        }
+
+
+        .password-toggle {
+
+            cursor: pointer;
+
+            background: #f3efff;
+
+            border: 1px solid #d8dce8;
+
+            color: #6d5aa8;
+
+            min-width: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        /* =========================
+           PASSWORD STRENGTH
+        ========================= */
+
+        .strength-area {
+
+            margin-top: 7px;
+        }
+
+
+        .strength-text {
+
+            font-size: 13px;
+
+            color: #718096;
+
+            margin-bottom: 5px;
+        }
+
+
+        .strength-bar {
+
+            height: 7px;
+
+            background: #e4e7ec;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+
+        .strength-fill {
+
+            height: 100%;
+
+            width: 0%;
+
+            border-radius: 10px;
+
+            transition: 0.3s;
+        }
+
+
+        /* =========================
+           REGISTER BUTTON
+        ========================= */
+
+        .register-btn {
+
+            width: 100%;
+
+            height: 50px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: 600;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #f56f9d,
+                    #a45de5
+                );
+
+            box-shadow:
+                0 7px 18px rgba(164,93,229,0.22);
+
+            transition: 0.2s;
+
+            margin-top: 8px;
+        }
+
+
+        .register-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 22px rgba(164,93,229,0.28);
+        }
+
+
+        .register-btn i {
+
+            margin-right: 8px;
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        #message {
+
+            margin-top: 15px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            font-weight: 500;
+        }
+
+
+        /* =========================
+           LOGIN LINK
+        ========================= */
+
+        .login-section {
+
+            margin-top: 22px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid #e8e8ee;
+
+            text-align: center;
+
+            color: #667085;
+        }
+
+
+        .login-section a {
+
+            color: #7b4dcc;
+
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+
+        .login-section a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 576px) {
+
+            body {
+
+                padding: 15px;
+            }
+
+            .register-card {
+
+                padding: 25px 20px;
+
+                border-radius: 18px;
+            }
+
+            .register-title {
+
+                font-size: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="register-card">
+
+
+    <!-- BRAND -->
+
+    <div class="brand">
+
+        <i class="bi bi-tools"></i>
+
+        Field Service
+
+    </div>
+
+
+    <!-- USER ICON -->
+
+    <div class="user-icon">
+
+        <i class="bi bi-person-fill"></i>
+
+    </div>
+
+
+    <!-- TITLE -->
+
+    <h1 class="register-title">
+
+        Register User
+
+    </h1>
+
+
+    <p class="register-subtitle">
+
+        Create your account to get started
+
+    </p>
+
+
+
+    <!-- =========================
+         REGISTER FORM
+    ========================= -->
+
+    <form id="registerForm">
+
+
+        <!-- NAME -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Name
+
+                <span class="required">*</span>
+
+            </label>
+
+
+            <div class="input-group">
+
+                <span class="input-group-text">
+
+                    <i class="bi bi-person"></i>
+
+                </span>
+
+
+                <input
+                    type="text"
+                    id="userName"
+                    class="form-control"
+                    placeholder="Enter your name"
+                    required>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Email
+
+                <span class="required">*</span>
+
+            </label>
+
+
+            <div class="input-group">
+
+                <span class="input-group-text">
+
+                    <i class="bi bi-envelope"></i>
+
+                </span>
+
+
+                <input
+                    type="email"
+                    id="userEmail"
+                    class="form-control"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PHONE -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Phone
+
+                <span class="required">*</span>
+
+            </label>
+
+
+            <div class="input-group">
+
+                <span class="input-group-text">
+
+                    <i class="bi bi-telephone"></i>
+
+                </span>
+
+
+                <input
+                    type="tel"
+                    id="phone"
+                    class="form-control"
+                    placeholder="Enter phone number"
+                    required>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Password
+
+                <span class="required">*</span>
+
+            </label>
+
+
+            <div class="input-group">
+
+                <span class="input-group-text">
+
+                    <i class="bi bi-lock"></i>
+
+                </span>
+
+
+                <input
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    placeholder="Enter password"
+                    required>
+
+
+                <span
+                    class="password-toggle"
+                    onclick="togglePassword('password','passwordIcon')">
+
+                    <i
+                        class="bi bi-eye-slash"
+                        id="passwordIcon"></i>
+
+                </span>
+
+            </div>
+
+
+            <!-- PASSWORD STRENGTH -->
+
+            <div class="strength-area">
+
+                <div
+                    class="strength-text"
+                    id="strengthText">
+
+                    Password strength
+
+                </div>
+
+
+                <div class="strength-bar">
+
+                    <div
+                        class="strength-fill"
+                        id="strengthFill">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Confirm Password
+
+                <span class="required">*</span>
+
+            </label>
+
+
+            <div class="input-group">
+
+                <span class="input-group-text">
+
+                    <i class="bi bi-lock-fill"></i>
+
+                </span>
+
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    class="form-control"
+                    placeholder="Confirm password"
+                    required>
+
+
+                <span
+                    class="password-toggle"
+                    onclick="togglePassword('confirmPassword','confirmIcon')">
+
+                    <i
+                        class="bi bi-eye-slash"
+                        id="confirmIcon"></i>
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ROLE -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Role
+
+                <span class="required">*</span>
+
+            </label>
+
+
+            <div class="input-group">
+
+                <span class="input-group-text">
+
+                    <i class="bi bi-people"></i>
+
+                </span>
+
+
+                <select
+                    id="role"
+                    class="form-select"
+                    required>
+
+                    <option value="">
+                        Select Role
+                    </option>
+
+                    <option value="MANAGER">
+                        Manager
+                    </option>
+
+                    <option value="DISPATCHER">
+                        Dispatcher
+                    </option>
+
+                    <option value="TECHNICIAN">
+                        Technician
+                    </option>
+
+                    <option value="CUSTOMER">
+                        Customer
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- REGISTER BUTTON -->
+
+        <button
+            type="submit"
+            class="register-btn">
+
+            <i class="bi bi-person-plus-fill"></i>
+
+            Register
+
+        </button>
+
+
+        <!-- MESSAGE -->
+
+        <div id="message"></div>
+
+
+    </form>
+
+
+
+    <!-- LOGIN -->
+
+    <div class="login-section">
+
+        Already have an account?
+
+        <br>
+
+        <a href="/Login.html">
+
+            Login
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   PASSWORD SHOW / HIDE
+========================= */
+
+function togglePassword(
+    inputId,
+    iconId
+) {
+
+    const input =
+        document.getElementById(inputId);
+
+    const icon =
+        document.getElementById(iconId);
+
+
+    if (input.type === "password") {
+
+        input.type = "text";
+
+        icon.classList.remove(
+            "bi-eye-slash"
+        );
+
+        icon.classList.add(
+            "bi-eye"
+        );
+
+    } else {
+
+        input.type = "password";
+
+        icon.classList.remove(
+            "bi-eye"
+        );
+
+        icon.classList.add(
+            "bi-eye-slash"
+        );
+
+    }
+
+}
+
+
+
+/* =========================
+   PASSWORD STRENGTH
+========================= */
+
+document
+    .getElementById("password")
+    .addEventListener(
+        "input",
+        function () {
+
+            const password =
+                this.value;
+
+            const fill =
+                document.getElementById(
+                    "strengthFill"
+                );
+
+            const text =
+                document.getElementById(
+                    "strengthText"
+                );
+
+
+            let strength = 0;
+
+
+            if (password.length >= 6) {
+
+                strength++;
+
+            }
+
+
+            if (/[A-Z]/.test(password)) {
+
+                strength++;
+
+            }
+
+
+            if (/[0-9]/.test(password)) {
+
+                strength++;
+
+            }
+
+
+            if (/[^A-Za-z0-9]/.test(password)) {
+
+                strength++;
+
+            }
+
+
+            if (password.length === 0) {
+
+                fill.style.width = "0%";
+
+                text.innerText =
+                    "Password strength";
+
+            }
+
+            else if (strength <= 1) {
+
+                fill.style.width = "25%";
+
+                fill.style.background =
+                    "#e76f7f";
+
+                text.innerText =
+                    "Weak";
+
+            }
+
+            else if (strength === 2) {
+
+                fill.style.width = "50%";
+
+                fill.style.background =
+                    "#f2b84b";
+
+                text.innerText =
+                    "Medium";
+
+            }
+
+            else if (strength === 3) {
+
+                fill.style.width = "75%";
+
+                fill.style.background =
+                    "#55ad78";
+
+                text.innerText =
+                    "Good";
+
+            }
+
+            else {
+
+                fill.style.width = "100%";
+
+                fill.style.background =
+                    "#35a66f";
+
+                text.innerText =
+                    "Strong";
+
+            }
+
+        }
+    );
+
+
+
+/* =========================
+   REGISTER
+========================= */
+
+document
+    .getElementById("registerForm")
+    .addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const userName =
+                document.getElementById(
+                    "userName"
+                ).value.trim();
+
+
+            const userEmail =
+                document.getElementById(
+                    "userEmail"
+                ).value.trim();
+
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "password"
+                ).value;
+
+
+            const confirmPassword =
+                document.getElementById(
+                    "confirmPassword"
+                ).value;
+
+
+            const role =
+                document.getElementById(
+                    "role"
+                ).value;
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+
+            /* PASSWORD CHECK */
+
+            if (
+                password !==
+                confirmPassword
+            ) {
+
+                message.innerText =
+                    "Passwords do not match.";
+
+                message.style.color =
+                    "#d9534f";
+
+                return;
+            }
+
+
+            /* REQUEST DATA */
+
+            const data = {
+
+                userName: userName,
+
+                userEmail: userEmail,
+
+                phone: phone,
+
+                password: password,
+
+                role: role
+
+            };
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        "/api/user_auth/register",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(data)
+
+                        }
+                    );
+
+
+                const result =
+                    await response.text();
+
+
+                if (response.ok) {
+
+
+                    message.innerText =
+                        "Registration successful!";
+
+                    message.style.color =
+                        "#26935c";
+
+
+                    document
+                        .getElementById(
+                            "registerForm"
+                        )
+                        .reset();
+
+
+                    document
+                        .getElementById(
+                            "strengthFill"
+                        )
+                        .style.width =
+                        "0%";
+
+
+                    document
+                        .getElementById(
+                            "strengthText"
+                        )
+                        .innerText =
+                        "Password strength";
+
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "/Login.html";
+
+                        },
+                        1200
+                    );
+
+
+                } else {
+
+
+                    message.innerText =
+                        result ||
+                        "Registration failed.";
+
+                    message.style.color =
+                        "#d9534f";
+
+                }
+
+
+            } catch (error) {
+
+
+                console.error(error);
+
+
+                message.innerText =
+                    "Server error. Please try again.";
+
+                message.style.color =
+                    "#d9534f";
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
